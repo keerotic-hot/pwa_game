@@ -10,6 +10,7 @@
 		document.body.appendChild(container);
 
 		camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1100);
+		camera.position.set(0,10,0);
 		controls = new THREE.DeviceOrientationControls(camera);
 
 		scene = new THREE.Scene();
@@ -21,6 +22,7 @@
 		container.appendChild(renderer.domElement);
 
 		createSkybox();
+		createPlane();
 
 		loop();
 	});
@@ -35,6 +37,14 @@
 
 		var skybox = new THREE.Mesh(geo,mat);
 		scene.add(skybox);
+	}
+
+	function createPlane(){
+		var geo = new THREE.PlaneGeometry( 100, 100, 10,10 );
+		var mat = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, transparent: true, opacity: 0.1, side: THREE.DoubleSide });
+		var object = new THREE.Mesh(geo,mat);
+		object.rotation.set(90*Math.PI/180,0,0);
+		scene.add( object );
 	}
 
 	function loop(){
