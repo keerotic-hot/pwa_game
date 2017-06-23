@@ -2,8 +2,13 @@
 	var container;
 	var renderer;
 	var scene;
+	var light;
 	var camera;
 	var controls;
+	var items = [];
+
+	var toRad = Math.PI/180;
+	var toDeg = 180/Math.PI;
 
 	window.addEventListener('load', function() {
 		init();
@@ -29,6 +34,11 @@
 
 		createSkybox();
 		createPlane();
+		createLight();
+
+		for(i = 0; i < 20; i++){
+			items.push(new Item());
+		}
 	}
 
 	function onWindowResize(){
@@ -51,11 +61,24 @@
 
 	function createPlane(){
 		var geo = new THREE.PlaneGeometry( 2000, 2000, 20,20 );
-		var mat = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, transparent: true, opacity: 0.5, side: THREE.DoubleSide });
+		var mat = new THREE.MeshBasicMaterial( { 
+			color: 0xff0000, 
+			wireframe: true, 
+			transparent: true, 
+			opacity: 0.5, side: 
+			THREE.DoubleSide 
+		});
 		var object = new THREE.Mesh(geo,mat);
-		object.rotation.set(90*Math.PI/180,0,0);
+		object.rotation.set(90*toRad,0,0);
 		object.position.set(0,-50,0);
 		scene.add( object );
+	}
+
+	function createLight(){
+
+		light = new THREE.DirectionalLight( 0xffffff );
+		light.position.set( 0, 100, 100 ).normalize();
+		scene.add(light);
 	}
 
 	function loop(){
@@ -64,10 +87,37 @@
 		//camera.translateZ(-1);
 		var dir = camera.getWorldDirection();
 		dir.y = 0;
-		camera.position.add(dir.multiplyScalar(1));
+		//camera.position.add(dir.multiplyScalar(1));
+
+		for(var i in items){
+			items[i].update();
+		}
 
 		controls.update();
 		renderer.render(scene,camera);
+	}
+
+	function Item(){
+		var _this = this;
+		var geo = new THREE.BoxGeometry(20,20,20,1,1,1);
+		var mat = new THREE.MeshPhongMaterial({ 
+			color: 0xff0000, 
+			shading: THREE.FlatShading, 
+			overdraw: 0.5, 
+			shininess: 0 
+		});
+		var mesh = new THREE.Mesh(geo,mat);
+
+		scene.add(mesh);
+		var x = Math.random()*1000-500;
+		var y = 0;//Math.random()*100;
+		var z = Math.random()*1000-500;
+		mesh.position.set(x,y,z);
+
+		_this.update = function(){
+			mesh.rotateX(2*toRad);
+			mesh.rotateY(1*toRad);
+		}
 	}
 
 
