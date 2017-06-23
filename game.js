@@ -9,7 +9,7 @@
 		container = document.createElement('div');
 		document.body.appendChild(container);
 
-		camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1000);
+		camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1100);
 		controls = new THREE.DeviceOrientationControls(camera);
 
 		scene = new THREE.Scene();

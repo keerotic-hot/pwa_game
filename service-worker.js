@@ -5,6 +5,8 @@ var filesToCache = [
   '/index.html',
   '/js/three.js',
   '/js/game.js',
+  '/js/DeviceOrientationControls.js',
+  '/img/skybox.jpg',
 ];
 
 self.addEventListener('install', function(e) {
