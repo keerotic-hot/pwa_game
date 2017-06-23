@@ -1,0 +1,258 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'firebase-tools' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose cache add [ 'firebase-tools', null ]
+5 verbose cache add name=undefined spec="firebase-tools" args=["firebase-tools",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'firebase-tools',
+6 verbose parsed url   path: 'firebase-tools',
+6 verbose parsed url   href: 'firebase-tools' }
+7 silly lockFile 3fa4b23e-firebase-tools firebase-tools
+8 verbose lock firebase-tools /Users/keerotic/.npm/3fa4b23e-firebase-tools.lock
+9 silly lockFile 3fa4b23e-firebase-tools firebase-tools
+10 silly lockFile 3fa4b23e-firebase-tools firebase-tools
+11 verbose addNamed [ 'firebase-tools', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 59c4bcc4-firebase-tools firebase-tools@
+14 verbose lock firebase-tools@ /Users/keerotic/.npm/59c4bcc4-firebase-tools.lock
+15 silly addNameRange { name: 'firebase-tools', range: '*', hasData: false }
+16 verbose request where is /firebase-tools
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id d091eaeccbb059b5
+19 verbose url raw /firebase-tools
+20 verbose url resolving [ 'https://registry.npmjs.org/', './firebase-tools' ]
+21 verbose url resolved https://registry.npmjs.org/firebase-tools
+22 verbose request where is https://registry.npmjs.org/firebase-tools
+23 info trying registry request attempt 1 at 21:07:28
+24 verbose etag W/"59422cbb-1d08e"
+25 http GET https://registry.npmjs.org/firebase-tools
+26 http 304 https://registry.npmjs.org/firebase-tools
+27 silly registry.get cb [ 304,
+27 silly registry.get   { date: 'Fri, 23 Jun 2017 14:07:30 GMT',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     'cache-control': 'max-age=300',
+27 silly registry.get     etag: 'W/"59422cbb-1d08e"',
+27 silly registry.get     age: '185',
+27 silly registry.get     connection: 'keep-alive',
+27 silly registry.get     'x-served-by': 'cache-sin18024-SIN',
+27 silly registry.get     'x-cache': 'HIT',
+27 silly registry.get     'x-cache-hits': '1',
+27 silly registry.get     'x-timer': 'S1498226851.758892,VS0,VE0',
+27 silly registry.get     vary: 'Accept-Encoding' } ]
+28 verbose etag https://registry.npmjs.org/firebase-tools from cache
+29 silly addNameRange number 2 { name: 'firebase-tools', range: '*', hasData: true }
+30 silly addNameRange versions [ 'firebase-tools',
+30 silly addNameRange   [ '0.0.1',
+30 silly addNameRange     '0.0.2',
+30 silly addNameRange     '0.0.3',
+30 silly addNameRange     '0.0.4',
+30 silly addNameRange     '0.0.5',
+30 silly addNameRange     '0.0.6',
+30 silly addNameRange     '0.1.0',
+30 silly addNameRange     '0.1.1',
+30 silly addNameRange     '0.1.2',
+30 silly addNameRange     '0.1.3',
+30 silly addNameRange     '0.1.4',
+30 silly addNameRange     '0.1.5',
+30 silly addNameRange     '0.1.6',
+30 silly addNameRange     '0.2.0',
+30 silly addNameRange     '0.3.0',
+30 silly addNameRange     '0.4.0',
+30 silly addNameRange     '0.5.0',
+30 silly addNameRange     '1.0.0',
+30 silly addNameRange     '1.0.1',
+30 silly addNameRange     '1.0.2',
+30 silly addNameRange     '1.0.3',
+30 silly addNameRange     '1.0.4',
+30 silly addNameRange     '1.0.5',
+30 silly addNameRange     '1.0.6',
+30 silly addNameRange     '1.1.0',
+30 silly addNameRange     '1.1.1',
+30 silly addNameRange     '1.1.2',
+30 silly addNameRange     '1.1.3',
+30 silly addNameRange     '1.1.4',
+30 silly addNameRange     '1.1.5',
+30 silly addNameRange     '1.1.6',
+30 silly addNameRange     '1.2.0',
+30 silly addNameRange     '2.0.0',
+30 silly addNameRange     '2.0.1',
+30 silly addNameRange     '2.0.2',
+30 silly addNameRange     '2.1.0',
+30 silly addNameRange     '2.1.1',
+30 silly addNameRange     '2.2.0',
+30 silly addNameRange     '2.2.1',
+30 silly addNameRange     '3.0.0',
+30 silly addNameRange     '3.0.1',
+30 silly addNameRange     '3.0.2',
+30 silly addNameRange     '3.0.3',
+30 silly addNameRange     '3.0.4',
+30 silly addNameRange     '3.0.5',
+30 silly addNameRange     '3.0.6',
+30 silly addNameRange     '3.0.7',
+30 silly addNameRange     '3.0.8',
+30 silly addNameRange     '3.1.0',
+30 silly addNameRange     '3.2.0',
+30 silly addNameRange     '3.2.1',
+30 silly addNameRange     '3.2.2',
+30 silly addNameRange     '3.2.3',
+30 silly addNameRange     '3.3.0',
+30 silly addNameRange     '3.4.0',
+30 silly addNameRange     '3.5.0',
+30 silly addNameRange     '3.6.0',
+30 silly addNameRange     '3.6.1',
+30 silly addNameRange     '3.7.0',
+30 silly addNameRange     '3.8.0',
+30 silly addNameRange     '3.9.0',
+30 silly addNameRange     '3.9.1' ] ]
+31 verbose addNamed [ 'firebase-tools', '3.9.1' ]
+32 verbose addNamed [ '3.9.1', '3.9.1' ]
+33 silly lockFile 2864f453-firebase-tools-3-9-1 firebase-tools@3.9.1
+34 verbose lock firebase-tools@3.9.1 /Users/keerotic/.npm/2864f453-firebase-tools-3-9-1.lock
+35 silly lockFile 2864f453-firebase-tools-3-9-1 firebase-tools@3.9.1
+36 silly lockFile 2864f453-firebase-tools-3-9-1 firebase-tools@3.9.1
+37 silly lockFile 59c4bcc4-firebase-tools firebase-tools@
+38 silly lockFile 59c4bcc4-firebase-tools firebase-tools@
+39 silly resolved [ { name: 'firebase-tools',
+39 silly resolved     version: '3.9.1',
+39 silly resolved     description: 'Command-Line Interface for Firebase',
+39 silly resolved     main: 'index.js',
+39 silly resolved     bin: { firebase: './bin/firebase' },
+39 silly resolved     scripts: { test: 'gulp' },
+39 silly resolved     repository:
+39 silly resolved      { type: 'git',
+39 silly resolved        url: 'git+https://github.com/firebase/firebase-tools.git' },
+39 silly resolved     keywords:
+39 silly resolved      [ 'cdn',
+39 silly resolved        'cli',
+39 silly resolved        'ssl',
+39 silly resolved        'cloud',
+39 silly resolved        'hosting',
+39 silly resolved        'firebase',
+39 silly resolved        'realtime',
+39 silly resolved        'websockets',
+39 silly resolved        'synchronization' ],
+39 silly resolved     preferGlobal: true,
+39 silly resolved     engines: { node: '>=0.10.0 <8.0.0' },
+39 silly resolved     engineStrict: true,
+39 silly resolved     author: { name: 'Firebase', url: 'https://firebase.google.com/' },
+39 silly resolved     license: 'MIT',
+39 silly resolved     bugs: { url: 'https://github.com/firebase/firebase-tools/issues' },
+39 silly resolved     files: [ 'bin/**', 'lib/**', 'commands/**', 'templates/**', 'index.js' ],
+39 silly resolved     homepage: 'https://github.com/firebase/firebase-tools',
+39 silly resolved     dependencies:
+39 silly resolved      { JSONStream: '^1.2.1',
+39 silly resolved        archiver: '^0.16.0',
+39 silly resolved        chalk: '^1.1.0',
+39 silly resolved        cjson: '^0.3.1',
+39 silly resolved        'cli-table': '^0.3.1',
+39 silly resolved        commander: '^2.8.1',
+39 silly resolved        configstore: '^1.2.0',
+39 silly resolved        'cross-spawn': '^4.0.0',
+39 silly resolved        'csv-streamify': '^3.0.4',
+39 silly resolved        didyoumean: '^1.2.1',
+39 silly resolved        'es6-set': '^0.1.4',
+39 silly resolved        'exit-code': '^1.0.2',
+39 silly resolved        filesize: '^3.1.3',
+39 silly resolved        firebase: '2.x.x',
+39 silly resolved        'fs-extra': '^0.23.1',
+39 silly resolved        'fstream-ignore': '^1.0.2',
+39 silly resolved        inquirer: '^0.12.0',
+39 silly resolved        jsonschema: '^1.0.2',
+39 silly resolved        jsonwebtoken: '^5.4.0',
+39 silly resolved        lodash: '^4.6.1',
+39 silly resolved        open: '^0.0.5',
+39 silly resolved        ora: '0.2.3',
+39 silly resolved        portfinder: '^0.4.0',
+39 silly resolved        progress: '^1.1.8',
+39 silly resolved        request: '^2.58.0',
+39 silly resolved        rsvp: '^3.0.18',
+39 silly resolved        semver: '^5.0.3',
+39 silly resolved        superstatic: '^4.1',
+39 silly resolved        tar: '^2.2.0',
+39 silly resolved        tmp: '0.0.27',
+39 silly resolved        'universal-analytics': '^0.3.9',
+39 silly resolved        'update-notifier': '^0.5.0',
+39 silly resolved        'user-home': '^2.0.0',
+39 silly resolved        uuid: '^3.0.0',
+39 silly resolved        winston: '^1.0.1',
+39 silly resolved        '@google-cloud/functions-emulator': '^1.0.0-alpha.19' },
+39 silly resolved     devDependencies:
+39 silly resolved      { chai: '^3.0.0',
+39 silly resolved        'chai-as-promised': '^5.1.0',
+39 silly resolved        coveralls: '2.11.2',
+39 silly resolved        eslint: '^1.4.1',
+39 silly resolved        gulp: '^3.9.0',
+39 silly resolved        'gulp-eslint': '^1.0.0',
+39 silly resolved        'gulp-exit': '0.0.2',
+39 silly resolved        'gulp-istanbul': '^0.10.0',
+39 silly resolved        'gulp-mocha': '^2.1.2',
+39 silly resolved        'jshint-stylish': '^2.0.1',
+39 silly resolved        nock: '^2.10.0',
+39 silly resolved        sinon: '^1.17.4',
+39 silly resolved        'sinon-as-promised': '^4.0.0',
+39 silly resolved        'sinon-chai': '^2.8.0' },
+39 silly resolved     optionalDependencies: { '@google-cloud/functions-emulator': '^1.0.0-alpha.19' },
+39 silly resolved     gitHead: '6685fe4fd4887a8d5b535374a3cad497080f2561',
+39 silly resolved     _id: 'firebase-tools@3.9.1',
+39 silly resolved     _shasum: 'b62be2b456418a57bf1a8cf8b01a6b8f78f6c1b0',
+39 silly resolved     _from: 'firebase-tools@',
+39 silly resolved     _npmVersion: '3.10.8',
+39 silly resolved     _nodeVersion: '6.9.1',
+39 silly resolved     _npmUser: { name: 'firebase', email: 'operations+plainlogo@firebase.com' },
+39 silly resolved     dist:
+39 silly resolved      { shasum: 'b62be2b456418a57bf1a8cf8b01a6b8f78f6c1b0',
+39 silly resolved        tarball: 'https://registry.npmjs.org/firebase-tools/-/firebase-tools-3.9.1.tgz' },
+39 silly resolved     maintainers: [ [Object] ],
+39 silly resolved     _npmOperationalInternal:
+39 silly resolved      { host: 's3://npm-registry-packages',
+39 silly resolved        tmp: 'tmp/firebase-tools-3.9.1.tgz_1496361386679_0.5097492451313883' },
+39 silly resolved     directories: {},
+39 silly resolved     _resolved: 'https://registry.npmjs.org/firebase-tools/-/firebase-tools-3.9.1.tgz',
+39 silly resolved     readme: 'ERROR: No README data found!' } ]
+40 info install firebase-tools@3.9.1 into /usr/local/lib
+41 info installOne firebase-tools@3.9.1
+42 verbose lib/node_modules/firebase-tools unbuild
+43 verbose tar unpack /Users/keerotic/.npm/firebase-tools/3.9.1/package.tgz
+44 silly lockFile 7e3d5d18--lib-node-modules-firebase-tools tar:///usr/local/lib/node_modules/firebase-tools
+45 verbose lock tar:///usr/local/lib/node_modules/firebase-tools /Users/keerotic/.npm/7e3d5d18--lib-node-modules-firebase-tools.lock
+46 silly lockFile 9ed91867-firebase-tools-3-9-1-package-tgz tar:///Users/keerotic/.npm/firebase-tools/3.9.1/package.tgz
+47 verbose lock tar:///Users/keerotic/.npm/firebase-tools/3.9.1/package.tgz /Users/keerotic/.npm/9ed91867-firebase-tools-3-9-1-package-tgz.lock
+48 silly gunzTarPerm modes [ '755', '644' ]
+49 error Error: EACCES, mkdir '/usr/local/lib/node_modules/firebase-tools'
+49 error  { [Error: EACCES, mkdir '/usr/local/lib/node_modules/firebase-tools']
+49 error   errno: 3,
+49 error   code: 'EACCES',
+49 error   path: '/usr/local/lib/node_modules/firebase-tools',
+49 error   fstream_type: 'Directory',
+49 error   fstream_path: '/usr/local/lib/node_modules/firebase-tools',
+49 error   fstream_class: 'DirWriter',
+49 error   fstream_stack:
+49 error    [ '/usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+49 error      '/usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+49 error      'Object.oncomplete (fs.js:107:15)' ] }
+50 error Please try running this command again as root/Administrator.
+51 error System Darwin 15.6.0
+52 error command "node" "/usr/local/bin/npm" "install" "-g" "firebase-tools"
+53 error cwd /Users/keerotic/Desktop/HTML5/PWA/pwa_game
+54 error node -v v0.10.33
+55 error npm -v 1.4.28
+56 error path /usr/local/lib/node_modules/firebase-tools
+57 error fstream_path /usr/local/lib/node_modules/firebase-tools
+58 error fstream_type Directory
+59 error fstream_class DirWriter
+60 error code EACCES
+61 error errno 3
+62 error stack Error: EACCES, mkdir '/usr/local/lib/node_modules/firebase-tools'
+63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+63 error fstream_stack /usr/local/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+63 error fstream_stack Object.oncomplete (fs.js:107:15)
+64 verbose exit [ 3, true ]
