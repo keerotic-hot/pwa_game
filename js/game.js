@@ -10,22 +10,29 @@
 		document.body.appendChild(container);
 
 		camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1100);
-		camera.position.set(0,10,0);
+		camera.position.set(0,0,0);
 		controls = new THREE.DeviceOrientationControls(camera);
 
 		scene = new THREE.Scene();
 
 		renderer = new THREE.WebGLRenderer();
 		renderer.setPixelRatio(window.devicePixelRatio);
-		renderer.setSize(window.innerWidth,window.innerHeight);
-
 		container.appendChild(renderer.domElement);
+
+		window.addEventListener('resize',onWindowResize);
+		onWindowResize();
 
 		createSkybox();
 		createPlane();
 
 		loop();
 	});
+
+	function onWindowResize(){
+		renderer.setSize(window.innerWidth,window.innerHeight);
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();	
+	}
 
 	function createSkybox(){
 		var geo = new THREE.SphereGeometry(500,16,8);
@@ -39,11 +46,13 @@
 		scene.add(skybox);
 	}
 
+
 	function createPlane(){
-		var geo = new THREE.PlaneGeometry( 100, 100, 10,10 );
+		var geo = new THREE.PlaneGeometry( 1000, 1000, 20,20 );
 		var mat = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, transparent: true, opacity: 0.1, side: THREE.DoubleSide });
 		var object = new THREE.Mesh(geo,mat);
 		object.rotation.set(90*Math.PI/180,0,0);
+		object.position.set(0,-50,0);
 		scene.add( object );
 	}
 
