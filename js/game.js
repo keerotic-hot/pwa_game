@@ -6,10 +6,15 @@
 	var controls;
 
 	window.addEventListener('load', function() {
+		init();
+		loop();
+	});
+
+	function init(){
 		container = document.createElement('div');
 		document.body.appendChild(container);
 
-		camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,2000);
+		camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,4000);
 		camera.position.set(0,0,0);
 		controls = new THREE.DeviceOrientationControls(camera);
 
@@ -24,11 +29,7 @@
 
 		createSkybox();
 		createPlane();
-
-		loop();
-
-		setInterval(createFlyingObject,1000);
-	});
+	}
 
 	function onWindowResize(){
 		renderer.setSize(window.innerWidth,window.innerHeight);
@@ -48,7 +49,6 @@
 		scene.add(skybox);
 	}
 
-
 	function createPlane(){
 		var geo = new THREE.PlaneGeometry( 2000, 2000, 20,20 );
 		var mat = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: true, transparent: true, opacity: 0.5, side: THREE.DoubleSide });
@@ -60,13 +60,18 @@
 
 	function loop(){
 		requestAnimationFrame(loop);
+		
+		//camera.translateZ(-1);
+		var dir = camera.getWorldDirection();
+		dir.y = 0;
+		camera.position.add(dir.multiplyScalar(1));
+
 		controls.update();
 		renderer.render(scene,camera);
 	}
 
 
-
-	function FlyingObject(){
+	/*function FlyingObject(){
 		var _this = this;
 		var geo = new THREE.BoxGeometry(20,20,20,1,1,1);
 		var mat = new THREE.MeshBasicMaterial({color:0xff0000});
@@ -81,6 +86,6 @@
 
 	function createFlyingObject(){
 		var fo = new FlyingObject();
-	}
+	}*/
 	
 })();
