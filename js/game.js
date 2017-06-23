@@ -9,7 +9,7 @@
 		container = document.createElement('div');
 		document.body.appendChild(container);
 
-		camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,1,1100);
+		camera = new THREE.PerspectiveCamera(100,window.innerWidth/window.innerHeight,1,2000);
 		camera.position.set(0,0,0);
 		controls = new THREE.DeviceOrientationControls(camera);
 
@@ -35,7 +35,7 @@
 	}
 
 	function createSkybox(){
-		var geo = new THREE.SphereGeometry(500,16,8);
+		var geo = new THREE.SphereGeometry(1000,16,8);
 		geo.scale(-1,1,1);
 
 		var mat = new THREE.MeshBasicMaterial({

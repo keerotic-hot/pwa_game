@@ -1,12 +1,13 @@
 var dataCacheName = 'pwagame';
 var cacheName = 'pwagame';
+var base = '/pwa_game';
 var filesToCache = [
-  '/',
-  '/index.html',
-  '/js/three.js',
-  '/js/game.js',
-  '/js/DeviceOrientationControls.js',
-  '/img/skybox.jpg',
+  base+'/',
+  base+'/index.html',
+  base+'/js/three.js',
+  base+'/js/game.js',
+  base+'/js/DeviceOrientationControls.js',
+  base+'/img/skybox.jpg',
 ];
 
 self.addEventListener('install', function(e) {
