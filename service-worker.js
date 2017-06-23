@@ -3,6 +3,8 @@ var cacheName = 'pwagame';
 var filesToCache = [
   '/',
   '/index.html',
+  '/js/three.js',
+  '/js/game.js',
 ];
 
 self.addEventListener('install', function(e) {
