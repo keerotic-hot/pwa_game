@@ -48,6 +48,7 @@
 	var levelLose = document.getElementById('level-lose');
 	var gamePause = document.getElementById('game-pause');
 	var gameHiscore = document.getElementById('game-hiscore');
+	var hiscoreList = gameHiscore.getElementsByTagName('ul')[0];
 
 	window.addEventListener('load', function() {
 		init();
@@ -270,6 +271,11 @@
 		if(hp <= 0){
 			state = STATE.LOSE;
 			levelLose.classList.remove('hide');
+
+			firebase.database().ref('scores/' + Date.now()).set({
+				name: 'xxx',
+				score: score
+			});
 		}
 	}
 
@@ -409,11 +415,24 @@
 		});
 	}
 
-	console.log('.... firebase');
-	var scoresRef = firebase.database().ref().child('scores');
+	console.log('.... firebase ',firebase.auth().currentUser);
+	var scoresRef = firebase.database().ref('/scores').orderByChild('scores').limitToLast(10);
 	scoresRef.on('value',function(snap){
-		console.log(snap.val());
+		var scores = snap.val();
+		var arr = [];
+		for(var i in scores){
+			arr.push(scores[i]);
+		}
+		arr.sort(function(a,b){return b.score-a.score});
+		console.log(arr);
+		hiscoreList.innerHTML = '';
+		for(var i = 0; i < arr.length;i++){
+			var li = document.createElement('li');
+			li.innerHTML = '<span>'+arr[i].name+'</span> : <span>'+arr[i].score+'</span>';
+			hiscoreList.appendChild(li);
+		}
 	});
+
 
 	
 //})();
