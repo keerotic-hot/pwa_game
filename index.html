@@ -184,7 +184,7 @@
 	<div id="game-title" class="window hide">
 		<div class="logo"></div>
 		<input name="name" id="player-name" type="text" placeholder="enter name" value="Player"/>
-		<button id="btn-play" class="btn" onclick="playGame()">Play game</button>
+		<button id="btn-play" class="btn" onclick="aCoin.play();playGame()">Play game</button>
 		<button id="btn-hiscore" class="btn" onclick="showHiscore()">Hiscore</button>
 	</div>
 	<div id="level-cutscene" class="window hide">
@@ -221,7 +221,8 @@
 		<hr/>
 		<button id="btn-mainmenu3" class="btn" onclick="mainMenu()">Main menu</button>
 	</div>
-
+	<audio src="snd/coin.mp3" controls="none" id="aCoin" muted style="opacity:0;pointer-events:none"/>
+	
 	<script src="js/game.js"></script>
 	<script>
 		if('serviceWorker' in navigator) {

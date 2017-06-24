@@ -18,6 +18,8 @@
 		CACTUS:null
 	};
 
+	var aCoin = document.getElementById('aCoin');
+
 	var toRad = Math.PI/180;
 	var toDeg = 180/Math.PI;
 
@@ -307,6 +309,8 @@
 				hitItems = items.splice(i,1);
 				hitItems[0].destroy();
 				score=score+10;
+				aCoin.muted = false;
+				aCoin.play();
 			}
 		}
 
@@ -529,7 +533,6 @@
 			hiscoreList.appendChild(li);
 		}
 	});
-
 
 	
 //})();

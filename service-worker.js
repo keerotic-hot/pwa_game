@@ -12,6 +12,7 @@ var filesToCache = [
   base+'/img/floor.jpg',
   base+'/img/coin.png',
   base+'/img/obj/cactus.obj',
+  base+'/snd/coin.mp3',
 ];
 
 self.addEventListener('install', function(e) {
