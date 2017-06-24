@@ -351,6 +351,7 @@
 
 					info.innerHTML += '<br/><span style="color:red">โอ้ย!!</span>';
 					delayClear = 0;
+
 				}
 			}
 		}
