@@ -18,7 +18,14 @@
 		CACTUS:null
 	};
 
-	var aCoin = document.getElementById('aCoin');
+	var aCoin1 = document.getElementById('aCoin');
+	var aCoin2 = document.getElementById('aCoin2');
+	var aCoin3 = document.getElementById('aCoin3');
+	var aCoins = [aCoin1,aCoin2,aCoin3];
+	var aCoin = function(){
+		aCoins.unshift(aCoins.pop());
+		return aCoins[0];
+	}
 	var aHurt = document.getElementById('aHurt');
 
 	var toRad = Math.PI/180;
@@ -223,7 +230,9 @@
 	}
 
 	function playGame(){
-		aCoin.play();
+		aCoin1.play();
+		aCoin2.play();
+		aCoin3.play();
 		aHurt.play();
 
 		state = STATE.PAUSE;
@@ -231,9 +240,13 @@
 
 		localStorage.playerName = playerNameField.value;
 
-		aCoin.pause();
+		aCoin1.pause();
+		aCoin2.pause();
+		aCoin3.pause();
 		aHurt.pause();
-		aCoin.muted = false;
+		aCoin1.muted = false;
+		aCoin2.muted = false;
+		aCoin3.muted = false;
 		aHurt.muted = false;
 
 		levelCutScene.innerHTML = '<h1>Stage '+level+' Start!!</h1>';
@@ -257,7 +270,7 @@
 	function nextLevel(){
 		levelWin.classList.add('hide');		
 		level++;
-		generateLevel(5,5);
+		generateLevel(5,5+level-1);
 		playGame();
 	}
 
@@ -329,7 +342,7 @@
 				hitItems = items.splice(i,1);
 				hitItems[0].destroy();
 				score=score+10;
-				aCoin.play();
+				aCoin().play();
 			}
 		}
 
@@ -459,9 +472,9 @@
 
 		mesh.scale.set(10,10,10);
 
-		var x = Math.random()*1000-500;
+		var x = Math.random()*1400-700;
 		var y = -20;//Math.random()*100;
-		var z = Math.random()*1000-500;
+		var z = Math.random()*1400-700;
 		mesh.position.set(x,y,z);
 
 		mesh.rotateY(Math.random()*360*toRad);
