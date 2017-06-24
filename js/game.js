@@ -258,16 +258,22 @@
 			levelCutScene.classList.add('hide');
 			state = STATE.PLAYING;
 		},1000);
+
+		info.innerHTML = 'แตะที่จอเพื่อเคลื่อที่ไปข้างหน้า<br/>หาเหรียญให้ครบ<br/>ระวังต้นตะบองเพชรให้ดี';
 	}
 
 	function pauseGame(){
 		state = STATE.PAUSE;
 		gamePause.classList.remove('hide');
+
+		info.innerHTML = 'หยิบเครื่องขึ้นมา<br/>แตะ Continue เพื่อเล่นต่อ';
 	}
 
 	function continueGame(){
 		state = STATE.PLAYING;
 		gamePause.classList.add('hide');		
+
+		info.innerHTML = 'แตะที่จอเพื่อเคลื่อที่ไปข้างหน้า<br/>หาเหรียญให้ครบ<br/>ระวังต้นตะบองเพชรให้ดี';
 	}
 
 	function nextLevel(){
@@ -294,12 +300,16 @@
 		aCoin.muted = true;
 		aHurt.muted = true;
 	
+
+		info.innerHTML = 'info';
 	}
 
 	function showHiscore(){
 		gameHiscore.classList.remove('hide');
 		gameTitle.classList.add('hide');
 		levelLose.classList.add('hide');
+
+		info.innerHTML = '';
 	}
 
 	function loop(){
@@ -321,12 +331,16 @@
 		}
 	}
 
+	delayClear = 0;
 	function gameLoop(){
 
 		walkIf(touches.length>0);
 		
 		//if(touches.length>1){ fire(); }
-
+		if(delayClear--<=0){
+			info.innerHTML = 'แตะที่จอเพื่อเคลื่อที่ไปข้างหน้า<br/>หาเหรียญให้ครบ<br/>ระวังต้นตะบองเพชรให้ดี';
+			delayClear = 0;
+		}
 		for(var i in enemies){
 			enemies[i].update();
 
@@ -334,6 +348,9 @@
 				if(hp > 0){
 					aHurt.play();
 					hp--;
+
+					info.innerHTML += '<br/><span style="color:red">โอ้ย!!</span>';
+					delayClear = 0;
 				}
 			}
 		}
@@ -346,6 +363,9 @@
 				hitItems[0].destroy();
 				score=score+10;
 				aCoin().play();
+
+				info.innerHTML += '<br/><span style="color:blue">เย้!!</span>';
+				delayClear = 20;
 			}
 		}
 
@@ -376,6 +396,8 @@
 		if(hp <= 0){
 			state = STATE.LOSE;
 			levelLose.classList.remove('hide');
+
+			info.innerHTML = 'พลังหมด';
 
 			firebase.database().ref('scores/' + Date.now()).set({
 				name: playerNameField.value,
