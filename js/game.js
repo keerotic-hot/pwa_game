@@ -273,7 +273,7 @@
 			levelLose.classList.remove('hide');
 
 			firebase.database().ref('scores/' + Date.now()).set({
-				name: 'xxx',
+				name: document.getElementById('player-name').value,
 				score: score
 			});
 		}

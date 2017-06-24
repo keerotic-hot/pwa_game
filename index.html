@@ -60,6 +60,14 @@
 			bottom:40px;
 		}
 
+		input[type=text]{
+			border:solid 1px #333;
+			font-family:tahoma,verdana;
+			font-size:12px;
+			color:#000;
+			padding:5px 8px;
+		}
+
 		#game-title {
 		}
 
@@ -89,7 +97,7 @@
 		}
 
 		#game-hiscore {
-
+			overflow: auto;
 		}
 
 		#game-pause {
@@ -138,6 +146,7 @@
 
 	<div id="game-title" class="window hide">
 		<div class="logo"></div>
+		<input name="name" id="player-name" type="text" placeholder="enter name" value="Player"/>
 		<button id="btn-play" class="btn" onclick="playGame()">Play game</button>
 		<button id="btn-hiscore" class="btn" onclick="showHiscore()">Hiscore</button>
 	</div>
@@ -156,11 +165,7 @@
 	</div>
 	<div id="game-hiscore" class="window hide">
 		<h1>Hiscore</h1>
-		<ul>
-		<li>kee : 200</li>
-		<li>kee : 100</li>
-		<li>kee : 90</li>
-		</ul>
+		<ul></ul>
 		<button id="btn-mainmenu2" class="btn" onclick="mainMenu()">Main menu</button>
 	</div>
 	<div id="game-pause" class="window hide">
