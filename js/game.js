@@ -275,7 +275,7 @@
 
 		walkIf(touches.length>0);
 		
-		if(touches.length>1){ fire(); }
+		//if(touches.length>1){ fire(); }
 
 		for(var i in enemies){
 			enemies[i].update();
