@@ -10,7 +10,7 @@
 	var container;
 	var renderer;
 	var scene;
-	var light;
+	var light,light2;
 	var camera;
 	var controls;
 
@@ -112,6 +112,10 @@
 		light = new THREE.DirectionalLight( 0xffffff );
 		light.position.set( 0, 100, 100 ).normalize();
 		scene.add(light);
+
+		light2 = new THREE.DirectionalLight( 0xcc7700 );
+		light2.position.set( 0, -200, -200 ).normalize();
+		scene.add(light2);
 	}
 
 	function generateLevel(numEnenies,numItems){
@@ -256,10 +260,10 @@
 
 	function Item(){
 		var _this = this;
-		var geo = new THREE.BoxGeometry(15,15,15,1,1,1);
+		var geo = new THREE.CylinderGeometry( 10, 10, 2, 16, 1 );
 		var mat = new THREE.MeshPhongMaterial({ 
-			color: 0x00ffff, 
-			shading: THREE.FlatShading, 
+			color: 0xffd700, 
+			shading: THREE.SmoothShading, 
 			overdraw: 0.5, 
 			shininess: 0 
 		});
@@ -270,10 +274,10 @@
 		var y = 0;//Math.random()*100;
 		var z = Math.random()*1000-500;
 		mesh.position.set(x,y,z);
+		mesh.rotateX(90*toRad);
 
 		_this.update = function(){
-			mesh.rotateX(2*toRad);
-			mesh.rotateY(1*toRad);
+			mesh.rotateZ(5*toRad);
 		}
 
 		_this.hitted = function(){
