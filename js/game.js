@@ -1,4 +1,10 @@
-(function(){
+//(function(){
+	var STATE = {
+		TITLE:0,
+		PLAYING:1,
+		PAUSE:2,
+	};
+
 	var container;
 	var renderer;
 	var scene;
@@ -21,13 +27,22 @@
 	
 	var score = 0;
 
+	var state = STATE.TITLE;
+
 	
 	var info = document.getElementById('info');
-	var scoreboard = document.getElementById('score');
+	var scoreBoard = document.getElementById('scoreboard');
+	var gameTitle = document.getElementById('game-title');
+	var levelCutScene = document.getElementById('level-cutscene');
+	var levelWin = document.getElementById('level-win');
+	var levelLose = document.getElementById('level-lose');
+	var gamePause = document.getElementById('game-pause');
 
 	window.addEventListener('load', function() {
 		init();
 		loop();
+
+		gameTitle.classList.remove('hide');
 	});
 
 	function init(){
@@ -102,13 +117,41 @@
 		scene.add(light);
 	}
 
+	function playGame(){
+		state = STATE.PLAYING;
+		gameTitle.classList.add('hide');
+	}
+
+	function pauseGame(){
+		state = STATE.PAUSE;
+		gamePause.classList.remove('hide');
+	}
+
+	function continueGame(){
+		state = STATE.PLAYING;
+		gamePause.classList.add('hide');		
+	}
+
 	function loop(){
 		requestAnimationFrame(loop);
 		
+		switch(state){
+			case STATE.TITLE:
+				break;
+			case STATE.PLAYING:
+				gameLoop();
+				break;
+			case STATE.PAUSE:
+				pauseLoop();
+				break;
+		}
+	}
+
+	function gameLoop(){
+
 		walkIf(touches.length>0);
 		
 		if(touches.length>1){ fire(); }
-
 
 		for(var i in enemies){
 			enemies[i].update();
@@ -136,7 +179,20 @@
 		controls.update();
 		renderer.render(scene,camera);
 
-		scoreboard.innerHTML = 'Score : '+score;
+		scoreBoard.innerHTML = 'Score : '+score;
+		info.innerHTML = 
+			(camera.rotation.x*toDeg).toFixed(2)+','+
+			(camera.rotation.y*toDeg).toFixed(2)+','+
+			(camera.rotation.z*toDeg).toFixed(2);
+
+		if(camera.rotation.x*toDeg<-80){
+			pauseGame();
+		}
+	}
+
+	function pauseLoop(){
+		controls.update();
+		renderer.render(scene,camera);
 	}
 
 	function walkIf(isWalking){
@@ -270,4 +326,4 @@
 		});
 	}
 	
-})();
+//})();

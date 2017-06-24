@@ -12,7 +12,7 @@
 	<meta name="msapplication-TileImage" content="img/icons/144.png"/>
 	<meta name="msapplication-TileColor" content="#000"/>
 	<style>
-		*{margin:0;padding:0;border:none;outline:0 none}
+		*{margin:0;padding:0;border:none;outline:0 none;box-sizing:border-box;}
 		html,body{width:100%;height:100%;overflow:hidden;background:#000;}
 		.noselect {
 			-webkit-touch-callout:none;
@@ -34,7 +34,7 @@
 			pointer-events:none;
 		}
 
-		#score {
+		#scoreboard {
 			position:absolute;
 			top:0;
 			right:0;
@@ -44,13 +44,78 @@
 			padding:5px;
 			pointer-events:none;
 		}
+
+		.hide {
+			display:none;
+		}
+
+		.window {
+			position:absolute;
+			background: rgba(255,255,255,0.7);
+			border:solid 2px #fff;
+			text-align: center;
+			top:40px;
+			left:40px;
+			right:40px;
+			bottom:40px;
+		}
+
+		#game-title {
+		}
+
+		.logo {
+			background: url(img/icons/256.png) center center no-repeat;
+			background-size:contain;
+			width:100px;
+			height:100px;
+			margin:10px auto;
+		}
+
+		.btn {
+			padding:5px 8px;
+			border:solid 1px #333;
+		}
+
+		#level-cutscene {
+
+		}
+
+		#level-win {
+
+		}
+
+		#level-lose {
+
+		}
+
+		#game-hiscore {
+
+		}
+
+		#game-pause {
+
+		}
+
 	</style>
 	<script src="js/three.js"></script>
 	<script src="js/DeviceOrientationControls.js"></script>
 </head>
 <body>
 	<div id="info" class="noselect">info</div>
-	<div id="score" class="noselect">info</div>
+	<div id="scoreboard" class="noselect">score</div>
+	<div id="game-title" class="window hide">
+		<div class="logo"></div>
+		<button id="btn-play" class="btn" onclick="playGame()">Play game</button>
+	</div>
+	<div id="level-cutscene" class="window hide"></div>
+	<div id="level-win" class="window hide"></div>
+	<div id="level-lose" class="window hide"></div>
+	<div id="game-hiscore" class="window hide"></div>
+	<div id="game-pause" class="window hide">
+		<h1>pause</h1>
+		<button id="btn-continue" class="btn" onclick="continueGame()">Continue</button>
+	</div>
+
 	<script src="js/game.js"></script>
 	<script>
 		if('serviceWorker' in navigator) {
