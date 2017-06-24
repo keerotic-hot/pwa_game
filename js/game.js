@@ -400,5 +400,12 @@
 			info.innerHTML = 'touchend : '+touches.length;
 		});
 	}
+
+	console.log('.... firebase');
+	var scoresRef = firebase.database().ref().child('scores');
+	scoresRef.on('value',function(snap){
+		console.log(snap.val());
+	});
+
 	
 //})();
