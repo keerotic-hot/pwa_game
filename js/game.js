@@ -14,7 +14,9 @@
 	var camera;
 	var controls;
 
-	var cactus;
+	var MODEL = {
+		CACTUS:null
+	};
 
 	var toRad = Math.PI/180;
 	var toDeg = 180/Math.PI;
@@ -68,7 +70,7 @@
 		if(loaded == total){
 			gameTitle.classList.remove('hide');
 
-			generateLevel(2,5);
+			resetGame();
 		}
 	};
 
@@ -86,20 +88,7 @@
 		var loader = new THREE.OBJLoader( manager );
 		loader.load( 'img/obj/cactus.obj', function ( object ) {
 
-			/*object.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-
-					child.material.map = texture;
-
-				}
-
-			} );
-
-			object.position.y = - 95;
-			scene.add( object );*/
-
-			cactus = object;
+			MODEL.CACTUS = object;
 
 		}, onProgress, onError );
 	}
@@ -194,7 +183,7 @@
 	function generateLevel(numEnenies,numItems){
 
 		for(i = 0; i < numEnenies; i++){
-			enemies.push(new Enemy());
+			enemies.push(new Cactus());
 		}
 
 		for(i = 0; i < numItems; i++){
@@ -208,7 +197,7 @@
 		hp = MAX_HP;
 		score = 0;
 		camera.position.set(0,0,0);
-		generateLevel(2,5);
+		generateLevel(10,5);
 
 		scoreBoard.innerHTML = 'Score : '+score;
 		hpIndcator.style.width = (hp/MAX_HP*100)+'%';
@@ -239,7 +228,7 @@
 	function nextLevel(){
 		levelWin.classList.add('hide');		
 		level++;
-		generateLevel(2,5);
+		generateLevel(5,5);
 		playGame();
 	}
 
@@ -406,7 +395,7 @@
 		}
 	}
 
-	function Enemy(){
+	function Cactus(){
 		var _this = this;
 
 		var mat = new THREE.MeshPhongMaterial({ 
@@ -416,7 +405,7 @@
 			shininess: 0 
 		});
 		
-		var mesh = cactus.clone();
+		var mesh = MODEL.CACTUS.clone();
 		
 		scene.add(mesh);
 		mesh.material = mat;
@@ -428,19 +417,29 @@
 		var z = Math.random()*1000-500;
 		mesh.position.set(x,y,z);
 
+		mesh.rotateY(Math.random()*360*toRad);
+
 		
 		mesh.traverse(function(child){
 			if(child instanceof THREE.Mesh) {
 				child.material = mat;
 			}
 		});
-
+		var count = 0;
 		_this.update = function(){
 			//...
+			var n = Math.abs(Math.sin(count*2*toRad)*5);
+			var h = 10+n;
+			var w = 15-n;
+			mesh.scale.set(w,h,w);
+			count++;
+			count%=180;
 		}
 
 		_this.hitted = function(){
-			return mesh.position.distanceTo(camera.position)<20;
+			var vec = mesh.position.clone();
+			vec.y = 0;
+			return vec.distanceTo(camera.position)<30;
 		}
 
 		_this.remove = function(){
