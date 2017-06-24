@@ -17,9 +17,11 @@
 	var items = [];
 	var bullets = [];
 	
+	var score = 0;
 
 	
 	var info = document.getElementById('info');
+	var scoreboard = document.getElementById('score');
 
 	window.addEventListener('load', function() {
 		init();
@@ -73,7 +75,7 @@
 	}
 
 	function createPlane(){
-		var geo = new THREE.PlaneGeometry( 2000, 2000, 20,20 );
+		var geo = new THREE.PlaneGeometry( 2000, 2000, 40,40 );
 		var mat = new THREE.MeshBasicMaterial( { 
 			color: 0xff0000, 
 			wireframe: true, 
@@ -83,7 +85,7 @@
 		});
 		var object = new THREE.Mesh(geo,mat);
 		object.rotation.set(90*toRad,0,0);
-		object.position.set(0,-50,0);
+		object.position.set(0,-20,0);
 		scene.add( object );
 	}
 
@@ -99,12 +101,17 @@
 		
 		walkIf(touches.length>0);
 		
-		if(touches.length>0){
-			fire();
-		}
+		if(touches.length>1){ fire(); }
 
+		var temp = [];
 		for(var i in items){
 			items[i].update();
+
+			if(items[i].hitted()){
+				hitItems = items.splice(i,1);
+				hitItems[0].remove();
+				score++;
+			}
 		}
 		for(var i in bullets){
 			bullets[i].update();
@@ -112,6 +119,8 @@
 
 		controls.update();
 		renderer.render(scene,camera);
+
+		scoreboard.innerHTML = 'Score : '+score;
 	}
 
 	function walkIf(isWalking){
@@ -137,7 +146,7 @@
 		if(canFire){
 			bullets.push(new Bullet());
 			canFire = false;
-			setTimeout(function(){canFire = true},1000);
+			setTimeout(function(){canFire = true},500);
 		}
 	}
 
@@ -162,12 +171,20 @@
 			mesh.rotateX(2*toRad);
 			mesh.rotateY(1*toRad);
 		}
+
+		_this.hitted = function(){
+			return mesh.position.distanceTo(camera.position)<20;
+		}
+
+		_this.remove = function(){
+			scene.remove(mesh);
+		}
 	}
 
 
 	function Bullet(){
 		var _this = this;
-		var geo = new THREE.BoxGeometry(1,1,1,1,1,1);
+		var geo = new THREE.SphereGeometry(1,8,8);
 		var mat = new THREE.MeshPhongMaterial({ 
 			color: 0xffff00, 
 			shading: THREE.FlatShading, 
@@ -185,7 +202,6 @@
 		
 		_this.update = function(){
 			mesh.position.add(dir.multiplyScalar(2));
-			mesh.rotateZ(-10*toRad);
 		}
 	}
 

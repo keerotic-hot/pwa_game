@@ -33,12 +33,24 @@
 			padding:5px;
 			pointer-events:none;
 		}
+
+		#score {
+			position:absolute;
+			top:0;
+			right:0;
+			color:#fff;
+			font-family:tahoma,verdana;
+			font-size:12px;
+			padding:5px;
+			pointer-events:none;
+		}
 	</style>
 	<script src="js/three.js"></script>
 	<script src="js/DeviceOrientationControls.js"></script>
 </head>
 <body>
 	<div id="info" class="noselect">info</div>
+	<div id="score" class="noselect">info</div>
 	<script src="js/game.js"></script>
 	<script>
 		if('serviceWorker' in navigator) {
