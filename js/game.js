@@ -30,7 +30,8 @@
 	var level = 1;
 	var score = 0;
 
-	var MAX_HP = 100;
+	var DEFAULT_MAX_HP = 100;
+	var MAX_HP = DEFAULT_MAX_HP;
 	var hp = MAX_HP;
 
 	var state = STATE.TITLE;
@@ -135,6 +136,18 @@
 		}
 	}
 
+	function resetGame() {
+		level = 1;
+		MAX_HP = DEFAULT_MAX_HP;
+		hp = MAX_HP;
+		score = 0;
+		camera.position.set(0,0,0);
+		generateLevel(2,5);
+
+		scoreBoard.innerHTML = 'Score : '+score;
+		hpIndcator.style.width = (hp/MAX_HP*100)+'%';
+	}
+
 	function playGame(){
 		state = STATE.PAUSE;
 		gameTitle.classList.add('hide');
@@ -165,11 +178,16 @@
 	}
 
 	function playAgain(){
-		alert('playagain');
+		resetGame();
+		playGame();
+		levelLose.classList.add('hide');	
 	}
 
 	function mainMenu(){
-		alert('mainmenu');
+		resetGame();
+		state = STATE.TITLE;
+		levelLose.classList.add('hide');	
+		gameTitle.classList.remove('hide');	
 	}
 
 	function loop(){
