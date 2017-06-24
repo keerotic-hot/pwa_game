@@ -25,6 +25,7 @@
 	var items = [];
 	var bullets = [];
 	
+	var level = 1;
 	var score = 0;
 
 	var state = STATE.TITLE;
@@ -118,8 +119,15 @@
 	}
 
 	function playGame(){
-		state = STATE.PLAYING;
+		state = STATE.PAUSE;
 		gameTitle.classList.add('hide');
+
+		levelCutScene.innerHTML = '<h1>Level : '+level+'</h1>';
+		levelCutScene.classList.remove('hide');
+		setTimeout(function(){
+			levelCutScene.classList.add('hide');
+			state = STATE.PLAYING;
+		},1500);
 	}
 
 	function pauseGame(){
