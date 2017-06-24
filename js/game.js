@@ -10,6 +10,8 @@
 	var toRad = Math.PI/180;
 	var toDeg = 180/Math.PI;
 
+	var info = document.getElementById('info');
+
 	window.addEventListener('load', function() {
 		init();
 		loop();
@@ -35,6 +37,8 @@
 		createSkybox();
 		createPlane();
 		createLight();
+
+		initController();
 
 		for(i = 0; i < 20; i++){
 			items.push(new Item());
@@ -84,10 +88,12 @@
 	function loop(){
 		requestAnimationFrame(loop);
 		
-		//camera.translateZ(-1);
-		var dir = camera.getWorldDirection();
-		dir.y = 0;
-		//camera.position.add(dir.multiplyScalar(1));
+		if(touches.length>0){
+			//camera.translateZ(-1);
+			var dir = camera.getWorldDirection();
+			dir.y = 0;
+			camera.position.add(dir.multiplyScalar(1));
+		}
 
 		for(var i in items){
 			items[i].update();
@@ -118,6 +124,26 @@
 			mesh.rotateX(2*toRad);
 			mesh.rotateY(1*toRad);
 		}
+	}
+
+	var touches = [];
+	function initController(){
+		info.innerHTML = 'init controller';
+
+		window.addEventListener('touchstart',function(event){
+			touches = event.touches;
+			info.innerHTML = 'touchstart : '+touches.length;
+		});
+
+		window.addEventListener('touchmove',function(event){
+			touches = event.touches;
+			info.innerHTML = 'touchemove : '+touches.length;
+		});
+
+		window.addEventListener('touchend',function(event){
+			touches = event.touches;
+			info.innerHTML = 'touchend : '+touches.length;
+		});
 	}
 
 

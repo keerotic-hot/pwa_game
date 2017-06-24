@@ -1,6 +1,6 @@
 var dataCacheName = 'pwagame';
 var cacheName = 'pwagame';
-var base = '/pwa_game';
+var base = '';
 var filesToCache = [
   base+'/',
   base+'/index.html',
