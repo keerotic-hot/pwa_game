@@ -47,6 +47,7 @@
 	var levelWin = document.getElementById('level-win');
 	var levelLose = document.getElementById('level-lose');
 	var gamePause = document.getElementById('game-pause');
+	var gameHiscore = document.getElementById('game-hiscore');
 
 	window.addEventListener('load', function() {
 		init();
@@ -187,7 +188,14 @@
 		resetGame();
 		state = STATE.TITLE;
 		levelLose.classList.add('hide');	
-		gameTitle.classList.remove('hide');	
+		gameHiscore.classList.add('hide');
+		gameTitle.classList.remove('hide');			
+	}
+
+	function showHiscore(){
+		gameHiscore.classList.remove('hide');
+		gameTitle.classList.add('hide');
+		levelLose.classList.add('hide');
 	}
 
 	function loop(){

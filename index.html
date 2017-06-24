@@ -139,6 +139,7 @@
 	<div id="game-title" class="window hide">
 		<div class="logo"></div>
 		<button id="btn-play" class="btn" onclick="playGame()">Play game</button>
+		<button id="btn-hiscore" class="btn" onclick="showHiscore()">Hiscore</button>
 	</div>
 	<div id="level-cutscene" class="window hide">
 		<h1>Level Start!</h1>
@@ -150,9 +151,18 @@
 	<div id="level-lose" class="window hide">
 		<h1>Game Over!</h1>
 		<button id="btn-playagain" class="btn" onclick="playAgain()">Play again</button>
+		<button id="btn-hiscore2" class="btn" onclick="showHiscore()">Hiscore</button>
 		<button id="btn-mainmenu" class="btn" onclick="mainMenu()">Main menu</button>
 	</div>
-	<div id="game-hiscore" class="window hide"></div>
+	<div id="game-hiscore" class="window hide">
+		<h1>Hiscore</h1>
+		<ul>
+		<li>kee : 200</li>
+		<li>kee : 100</li>
+		<li>kee : 90</li>
+		</ul>
+		<button id="btn-mainmenu2" class="btn" onclick="mainMenu()">Main menu</button>
+	</div>
 	<div id="game-pause" class="window hide">
 		<h1>pause</h1>
 		<button id="btn-continue" class="btn" onclick="continueGame()">Continue</button>
