@@ -19,10 +19,10 @@
 
 	var touches = [];
 	
-	var speed = 0;
-	var MAX_SPEED = 3;
 	var BULLET_SPEED = 4;
-
+	var MAX_SPEED = 3;
+	var speed = 0;
+	
 	var enemies = [];
 	var items = [];
 	var bullets = [];
@@ -30,11 +30,17 @@
 	var level = 1;
 	var score = 0;
 
+	var MAX_HP = 100;
+	var hp = MAX_HP;
+
 	var state = STATE.TITLE;
 
 	
 	var info = document.getElementById('info');
 	var scoreBoard = document.getElementById('scoreboard');
+	var hpBar = document.getElementById('hp-bar');
+	var hpIndcator = document.getElementById('hp');
+
 	var gameTitle = document.getElementById('game-title');
 	var levelCutScene = document.getElementById('level-cutscene');
 	var levelWin = document.getElementById('level-win');
@@ -158,6 +164,14 @@
 		playGame();
 	}
 
+	function playAgain(){
+		alert('playagain');
+	}
+
+	function mainMenu(){
+		alert('mainmenu');
+	}
+
 	function loop(){
 		requestAnimationFrame(loop);
 		
@@ -187,8 +201,8 @@
 			enemies[i].update();
 
 			if(enemies[i].hitted()){
-				if(score > 0){
-					score--;
+				if(hp > 0){
+					hp--;
 				}
 			}
 		}
@@ -210,6 +224,8 @@
 		renderer.render(scene,camera);
 
 		scoreBoard.innerHTML = 'Score : '+score;
+		hpIndcator.style.width = (hp/MAX_HP*100)+'%';
+
 		info.innerHTML = 
 			(camera.rotation.x*toDeg).toFixed(2)+','+
 			(camera.rotation.y*toDeg).toFixed(2)+','+
@@ -223,6 +239,11 @@
 			state = STATE.WIN;
 			levelWin.classList.remove('hide');
 			//levelWin.innerHTML = '<h1>Level '+level+' Clear!!</h1>';
+		}
+
+		if(hp <= 0){
+			state = STATE.LOSE;
+			levelLose.classList.remove('hide');
 		}
 	}
 
