@@ -219,10 +219,14 @@
 	}
 
 	function playGame(){
+		aCoin.play();
+		aHurt.play();
+		
 		state = STATE.PAUSE;
 		gameTitle.classList.add('hide');
 
-
+		aCoin.pause();
+		aHurt.pause();
 		aCoin.muted = false;
 		aHurt.muted = false;
 
