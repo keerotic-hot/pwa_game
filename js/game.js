@@ -368,6 +368,12 @@
 		var dir = camera.getWorldDirection();
 		dir.y = 0;
 		camera.position.add(dir.multiplyScalar(speed));
+		var pos = camera.position;
+		var B = 750;
+		if(pos.x > B) pos.set(B,pos.y,pos.z);
+		if(pos.x < -B) pos.set(-B,pos.y,pos.z);
+		if(pos.z > B) pos.set(pos.x,pos.y,B);
+		if(pos.z < -B) pos.set(pos.x,pos.y,-B);
 	}
 
 	var canFire = true;
