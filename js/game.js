@@ -255,7 +255,8 @@
 		resetGame();
 		state = STATE.TITLE;
 		levelLose.classList.add('hide');	
-		gameHiscore.classList.add('hide');
+		gameHiscore.classList.add('hide');	
+		gamePause.classList.add('hide');		
 		gameTitle.classList.remove('hide');			
 	}
 
