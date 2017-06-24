@@ -1,6 +1,11 @@
 {
   "name": "PWA Game",
   "short_name": "PWA Game",
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "background_color": "#fff",
+  "theme_color": "#fff",
+  "description":"PWA Game in 48hrs",
   "icons": [{
     "src": "img/icons/128.png",
       "sizes": "128x128",
@@ -21,9 +26,5 @@
       "src": "img/icons/256.png",
       "sizes": "256x256",
       "type": "image/png"
-    }],
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#fff",
-  "theme_color": "#fff"
+    }]
 }
