@@ -10,6 +10,7 @@ var filesToCache = [
   base+'/js/OBJLoader.js',
   base+'/img/skybox.jpg',
   base+'/img/floor.jpg',
+  base+'/img/coin.png',
   base+'/img/obj/cactus.obj',
 ];
 

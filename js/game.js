@@ -212,15 +212,14 @@
 
 		generateLevel(10,5,true);
 
-		scoreBoard.innerHTML = 'Score : '+score;
-		hpIndcator.style.width = (hp/MAX_HP*100)+'%';
+		updateIndicators();
 	}
 
 	function playGame(){
 		state = STATE.PAUSE;
 		gameTitle.classList.add('hide');
 
-		levelCutScene.innerHTML = '<h1>Level '+level+' Start!!</h1>';
+		levelCutScene.innerHTML = '<h1>Stage '+level+' Start!!</h1>';
 		levelCutScene.classList.remove('hide');
 		setTimeout(function(){
 			levelCutScene.classList.add('hide');
@@ -318,14 +317,13 @@
 		controls.update();
 		renderer.render(scene,camera);
 
-		scoreBoard.innerHTML = 'Score : '+score;
-		hpIndcator.style.width = (hp/MAX_HP*100)+'%';
+		updateIndicators();
 
-		info.innerHTML = 
+		/*info.innerHTML = 
 			(camera.rotation.x*toDeg).toFixed(2)+','+
 			(camera.rotation.y*toDeg).toFixed(2)+','+
 			(camera.rotation.z*toDeg).toFixed(2);
-
+		*/
 		if(camera.rotation.x*toDeg<-80){
 			pauseGame();
 		}
@@ -345,6 +343,11 @@
 				score: score
 			});
 		}
+	}
+
+	function updateIndicators(){
+		scoreBoard.innerHTML = 'Stage : '+level+'&nbsp;&nbsp;&nbsp; <img src="img/coin.png" style="margin-bottom:-2px"> x '+items.length+'&nbsp;&nbsp;&nbsp; Score : '+score;
+		hpIndcator.style.width = (hp/MAX_HP*100)+'%';
 	}
 
 	function pauseLoop(){
@@ -493,25 +496,23 @@
 	}
 
 	function initController(){
-		info.innerHTML = 'init controller';
-
+		
 		window.addEventListener('touchstart',function(event){
 			touches = event.touches;
-			info.innerHTML = 'touchstart : '+touches.length;
+			//info.innerHTML = 'touchstart : '+touches.length;
 		});
 
 		window.addEventListener('touchmove',function(event){
 			touches = event.touches;
-			info.innerHTML = 'touchemove : '+touches.length;
+			//info.innerHTML = 'touchemove : '+touches.length;
 		});
 
 		window.addEventListener('touchend',function(event){
 			touches = event.touches;
-			info.innerHTML = 'touchend : '+touches.length;
+			//info.innerHTML = 'touchend : '+touches.length;
 		});
 	}
 
-	console.log('.... firebase ',firebase.auth().currentUser);
 	var scoresRef = firebase.database().ref('/scores').orderByChild('scores').limitToLast(10);
 	scoresRef.on('value',function(snap){
 		var scores = snap.val();
@@ -520,7 +521,7 @@
 			arr.push(scores[i]);
 		}
 		arr.sort(function(a,b){return b.score-a.score});
-		console.log(arr);
+		
 		hiscoreList.innerHTML = '';
 		for(var i = 0; i < arr.length && i < 10;i++){
 			var li = document.createElement('li');
