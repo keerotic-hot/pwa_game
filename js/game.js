@@ -14,6 +14,8 @@
 	var camera;
 	var controls;
 
+	var cactus;
+
 	var toRad = Math.PI/180;
 	var toDeg = 180/Math.PI;
 
@@ -36,6 +38,7 @@
 
 	var state = STATE.TITLE;
 
+
 	
 	var info = document.getElementById('info');
 	var scoreBoard = document.getElementById('scoreboard');
@@ -54,8 +57,52 @@
 		init();
 		loop();
 
-		gameTitle.classList.remove('hide');
+		//gameTitle.classList.remove('hide');
 	});
+
+	var manager = new THREE.LoadingManager();
+	manager.onProgress = function ( item, loaded, total ) {
+
+		console.log( item, loaded, total );
+
+		if(loaded == total){
+			gameTitle.classList.remove('hide');
+
+			generateLevel(2,5);
+		}
+	};
+
+	var onProgress = function ( xhr ) {
+		if ( xhr.lengthComputable ) {
+			var percentComplete = xhr.loaded / xhr.total * 100;
+			console.log( Math.round(percentComplete, 2) + '% downloaded' );
+		}
+	};
+
+	var onError = function ( xhr ) {
+	};
+
+	function loadModels(){
+		var loader = new THREE.OBJLoader( manager );
+		loader.load( 'img/obj/cactus.obj', function ( object ) {
+
+			/*object.traverse( function ( child ) {
+
+				if ( child instanceof THREE.Mesh ) {
+
+					child.material.map = texture;
+
+				}
+
+			} );
+
+			object.position.y = - 95;
+			scene.add( object );*/
+
+			cactus = object;
+
+		}, onProgress, onError );
+	}
 
 	function init(){
 		container = document.createElement('div');
@@ -80,7 +127,7 @@
 
 		initController();
 
-		generateLevel(2,5);
+		loadModels();
 	}
 
 	function onWindowResize(){
@@ -102,18 +149,35 @@
 	}
 
 	function createPlane(){
-		var geo = new THREE.PlaneGeometry( 2000, 2000, 40,40 );
+		var geo = new THREE.PlaneGeometry( 2000, 2000, 10,10 );
+		var tex = new THREE.TextureLoader().load('img/floor.jpg');
+		tex.wrapS = THREE.RepeatWrapping;
+		tex.wrapT = THREE.RepeatWrapping;
+		tex.repeat.set( 8, 8 );
+
 		var mat = new THREE.MeshBasicMaterial( { 
-			color: 0xff0000, 
-			wireframe: true, 
-			transparent: true, 
-			opacity: 0.5, side: 
-			THREE.DoubleSide 
+			color: 0xc2b280, 
+			opacity: 0.5, 
+			side: THREE.DoubleSide,
+			map: tex
 		});
 		var object = new THREE.Mesh(geo,mat);
 		object.rotation.set(90*toRad,0,0);
 		object.position.set(0,-20,0);
 		scene.add( object );
+		/*
+		geo = new THREE.PlaneGeometry( 2000, 2000, 40,40 );
+		mat = new THREE.MeshPhongMaterial( { 
+			color: 0x827230, 
+			wireframe: true, 
+			transparent: true, 
+			opacity: 0.5, 
+			side: THREE.DoubleSide,
+		});
+		object = new THREE.Mesh(geo,mat);
+		object.rotation.set(90*toRad,0,0);
+		object.position.set(0,-19,0);
+		scene.add( object );*/
 	}
 
 	function createLight(){
@@ -344,24 +408,35 @@
 
 	function Enemy(){
 		var _this = this;
-		var geo = new THREE.BoxGeometry(30,30,30,1,1,1);
+
 		var mat = new THREE.MeshPhongMaterial({ 
-			color: 0xff0000, 
-			shading: THREE.FlatShading, 
+			color: 0x598527, 
+			shading: THREE.SmoothShading, 
 			overdraw: 0.5, 
 			shininess: 0 
 		});
-		var mesh = new THREE.Mesh(geo,mat);
-
+		
+		var mesh = cactus.clone();
+		
 		scene.add(mesh);
+		mesh.material = mat;
+
+		mesh.scale.set(10,10,10);
+
 		var x = Math.random()*1000-500;
-		var y = 0;//Math.random()*100;
+		var y = -20;//Math.random()*100;
 		var z = Math.random()*1000-500;
 		mesh.position.set(x,y,z);
 
+		
+		mesh.traverse(function(child){
+			if(child instanceof THREE.Mesh) {
+				child.material = mat;
+			}
+		});
+
 		_this.update = function(){
-			mesh.rotateX(2*toRad);
-			mesh.rotateY(4*toRad);
+			//...
 		}
 
 		_this.hitted = function(){
