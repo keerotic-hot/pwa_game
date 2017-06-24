@@ -10,6 +10,9 @@
 	var toRad = Math.PI/180;
 	var toDeg = 180/Math.PI;
 
+	var speed = 0;
+	var MAX_SPEED = 5;
+
 	var info = document.getElementById('info');
 
 	window.addEventListener('load', function() {
@@ -88,12 +91,8 @@
 	function loop(){
 		requestAnimationFrame(loop);
 		
-		if(touches.length>0){
-			//camera.translateZ(-1);
-			var dir = camera.getWorldDirection();
-			dir.y = 0;
-			camera.position.add(dir.multiplyScalar(1));
-		}
+		walkIf(touches.length>0);
+		
 
 		for(var i in items){
 			items[i].update();
@@ -101,6 +100,24 @@
 
 		controls.update();
 		renderer.render(scene,camera);
+	}
+
+	function walkIf(isWalking){
+		if(isWalking){
+			if(speed < MAX_SPEED){
+				speed++;
+			}
+		}
+		else {
+			if(speed > 0){
+				speed--;
+			}
+		}
+
+		//camera.translateZ(-1);
+		var dir = camera.getWorldDirection();
+		dir.y = 0;
+		camera.position.add(dir.multiplyScalar(speed));
 	}
 
 	function Item(){
