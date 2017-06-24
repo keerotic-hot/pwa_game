@@ -57,6 +57,10 @@
 	var gamePause = document.getElementById('game-pause');
 	var gameHiscore = document.getElementById('game-hiscore');
 	var hiscoreList = gameHiscore.getElementsByTagName('ul')[0];
+	var playerNameField = document.getElementById('player-name');
+
+	var playerName = localStorage.playerName || 'Player';
+	playerNameField.value = playerName;
 
 	window.addEventListener('load', function() {
 		init();
@@ -221,9 +225,11 @@
 	function playGame(){
 		aCoin.play();
 		aHurt.play();
-		
+
 		state = STATE.PAUSE;
 		gameTitle.classList.add('hide');
+
+		localStorage.playerName = playerNameField.value;
 
 		aCoin.pause();
 		aHurt.pause();
@@ -356,7 +362,7 @@
 			levelLose.classList.remove('hide');
 
 			firebase.database().ref('scores/' + Date.now()).set({
-				name: document.getElementById('player-name').value,
+				name: playerNameField.value,
 				score: score
 			});
 		}
@@ -547,5 +553,5 @@
 		}
 	});
 
-	
+		
 //})();
