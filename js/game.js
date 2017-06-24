@@ -180,7 +180,19 @@
 		scene.add(light2);
 	}
 
-	function generateLevel(numEnenies,numItems){
+	function generateLevel(numEnenies,numItems,removeAll){
+
+		if(removeAll){
+			for(var i = 0; i < enemies.length;i++){
+				enemies[i].destroy();
+			}
+			enemies = [];
+
+			for(var i = 0; i < items.length;i++){
+				items[i].destroy();
+			}
+			items = [];
+		}
 
 		for(i = 0; i < numEnenies; i++){
 			enemies.push(new Cactus());
@@ -197,7 +209,8 @@
 		hp = MAX_HP;
 		score = 0;
 		camera.position.set(0,0,0);
-		generateLevel(10,5);
+
+		generateLevel(10,5,true);
 
 		scoreBoard.innerHTML = 'Score : '+score;
 		hpIndcator.style.width = (hp/MAX_HP*100)+'%';
@@ -212,7 +225,7 @@
 		setTimeout(function(){
 			levelCutScene.classList.add('hide');
 			state = STATE.PLAYING;
-		},1500);
+		},1000);
 	}
 
 	function pauseGame(){
@@ -292,10 +305,11 @@
 
 			if(items[i].hitted()){
 				hitItems = items.splice(i,1);
-				hitItems[0].remove();
+				hitItems[0].destroy();
 				score=score+10;
 			}
 		}
+
 		for(var i in bullets){
 			bullets[i].update();
 		}
@@ -390,7 +404,7 @@
 			return mesh.position.distanceTo(camera.position)<20;
 		}
 
-		_this.remove = function(){
+		_this.destroy = function(){
 			scene.remove(mesh);
 		}
 	}
@@ -443,7 +457,7 @@
 			return vec.distanceTo(camera.position)<30;
 		}
 
-		_this.remove = function(){
+		_this.destroy = function(){
 			scene.remove(mesh);
 		}
 	}
@@ -501,7 +515,7 @@
 		arr.sort(function(a,b){return b.score-a.score});
 		console.log(arr);
 		hiscoreList.innerHTML = '';
-		for(var i = 0; i < arr.length;i++){
+		for(var i = 0; i < arr.length && i < 10;i++){
 			var li = document.createElement('li');
 			li.innerHTML = '<span>'+arr[i].name+'</span> : <span>'+arr[i].score+'</span>';
 			hiscoreList.appendChild(li);

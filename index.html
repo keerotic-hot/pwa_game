@@ -23,9 +23,14 @@
 			font-family:tahoma,verdana;
 			font-size:12px;
 			min-height:155px;
+			overflow: auto;
 		}
+		ul {
+			padding-top:2px;
+		}
+
 		li {
-			line-height: 17px;
+			line-height: 15px;
 		}
 
 		.noselect {
@@ -195,7 +200,7 @@
 		<button id="btn-continue" class="btn" onclick="nextLevel()">Next</button>
 	</div>
 	<div id="level-lose" class="window hide">
-		<h1>Game Over!</h1>
+		<h1>Gameover!</h1>
 		<hr/>
 		<button id="btn-playagain" class="btn" onclick="playAgain()">Play again</button>
 		<button id="btn-hiscore2" class="btn" onclick="showHiscore()">Hiscore</button>
@@ -212,9 +217,10 @@
 		<h1>Pause</h1>
 		<hr/>
 		<div class="info">
+			<button id="btn-continue" class="btn" onclick="continueGame()">Continue</button>
 		</div>
 		<hr/>
-		<button id="btn-continue" class="btn" onclick="continueGame()">Continue</button>
+		<button id="btn-mainmenu3" class="btn" onclick="mainMenu()">Main menu</button>
 	</div>
 
 	<script src="js/game.js"></script>
