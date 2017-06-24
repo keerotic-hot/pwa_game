@@ -65,9 +65,11 @@
 	var gameHiscore = document.getElementById('game-hiscore');
 	var hiscoreList = gameHiscore.getElementsByTagName('ul')[0];
 	var playerNameField = document.getElementById('player-name');
+	var pName = document.getElementById('pname');
 
 	var playerName = localStorage.playerName || 'Player';
 	playerNameField.value = playerName;
+	pName.innerHTML = playerName;
 
 	window.addEventListener('load', function() {
 		init();
@@ -239,6 +241,7 @@
 		gameTitle.classList.add('hide');
 
 		localStorage.playerName = playerNameField.value;
+		pName.innerHTML = playerNameField.value;
 
 		aCoin1.pause();
 		aCoin2.pause();
