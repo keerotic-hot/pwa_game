@@ -12,8 +12,10 @@
 	var touches = [];
 	
 	var speed = 0;
-	var MAX_SPEED = 1;
+	var MAX_SPEED = 3;
+	var BULLET_SPEED = 4;
 
+	var enemies = [];
 	var items = [];
 	var bullets = [];
 	
@@ -50,6 +52,10 @@
 		createLight();
 
 		initController();
+
+		for(i = 0; i < 10; i++){
+			enemies.push(new Enemy());
+		}
 
 		for(i = 0; i < 20; i++){
 			items.push(new Item());
@@ -103,14 +109,24 @@
 		
 		if(touches.length>1){ fire(); }
 
-		var temp = [];
+
+		for(var i in enemies){
+			enemies[i].update();
+
+			if(enemies[i].hitted()){
+				if(score > 0){
+					score--;
+				}
+			}
+		}
+
 		for(var i in items){
 			items[i].update();
 
 			if(items[i].hitted()){
 				hitItems = items.splice(i,1);
 				hitItems[0].remove();
-				score++;
+				score=score+10;
 			}
 		}
 		for(var i in bullets){
@@ -152,9 +168,9 @@
 
 	function Item(){
 		var _this = this;
-		var geo = new THREE.BoxGeometry(20,20,20,1,1,1);
+		var geo = new THREE.BoxGeometry(15,15,15,1,1,1);
 		var mat = new THREE.MeshPhongMaterial({ 
-			color: 0xff0000, 
+			color: 0x00ffff, 
 			shading: THREE.FlatShading, 
 			overdraw: 0.5, 
 			shininess: 0 
@@ -181,6 +197,36 @@
 		}
 	}
 
+	function Enemy(){
+		var _this = this;
+		var geo = new THREE.BoxGeometry(30,30,30,1,1,1);
+		var mat = new THREE.MeshPhongMaterial({ 
+			color: 0xff0000, 
+			shading: THREE.FlatShading, 
+			overdraw: 0.5, 
+			shininess: 0 
+		});
+		var mesh = new THREE.Mesh(geo,mat);
+
+		scene.add(mesh);
+		var x = Math.random()*1000-500;
+		var y = 0;//Math.random()*100;
+		var z = Math.random()*1000-500;
+		mesh.position.set(x,y,z);
+
+		_this.update = function(){
+			mesh.rotateX(2*toRad);
+			mesh.rotateY(4*toRad);
+		}
+
+		_this.hitted = function(){
+			return mesh.position.distanceTo(camera.position)<20;
+		}
+
+		_this.remove = function(){
+			scene.remove(mesh);
+		}
+	}
 
 	function Bullet(){
 		var _this = this;
@@ -201,7 +247,7 @@
 		mesh.rotation.set(camera.rotation.x,camera.rotation.y,camera.rotation.z);
 		
 		_this.update = function(){
-			mesh.position.add(dir.multiplyScalar(2));
+			mesh.position.add(dir.multiplyScalar(BULLET_SPEED));
 		}
 	}
 
