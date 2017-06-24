@@ -18,6 +18,8 @@
 			border-bottom:solid 1px #666;
 			margin-bottom:5px;
 		}
+		.snd {opacity:0;pointer-events:none;position:absolute;}
+
 		.info {
 			margin-bottom:5px;
 			font-family:tahoma,verdana;
@@ -184,7 +186,7 @@
 	<div id="game-title" class="window hide">
 		<div class="logo"></div>
 		<input name="name" id="player-name" type="text" placeholder="enter name" value="Player"/>
-		<button id="btn-play" class="btn" onclick="aCoin.play();playGame()">Play game</button>
+		<button id="btn-play" class="btn" onclick="aCoin.play();aHurt.play();playGame()">Play game</button>
 		<button id="btn-hiscore" class="btn" onclick="showHiscore()">Hiscore</button>
 	</div>
 	<div id="level-cutscene" class="window hide">
@@ -221,7 +223,8 @@
 		<hr/>
 		<button id="btn-mainmenu3" class="btn" onclick="mainMenu()">Main menu</button>
 	</div>
-	<audio src="snd/coin.mp3" controls="none" id="aCoin" muted style="opacity:0;pointer-events:none"/>
+	<audio src="snd/coin.mp3" controls="none" id="aCoin" muted class="snd"/>
+	<audio src="snd/hurt.mp3" controls="none" id="aHurt" muted class="snd"/>
 	
 	<script src="js/game.js"></script>
 	<script>

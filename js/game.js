@@ -19,6 +19,7 @@
 	};
 
 	var aCoin = document.getElementById('aCoin');
+	var aHurt = document.getElementById('aHurt');
 
 	var toRad = Math.PI/180;
 	var toDeg = 180/Math.PI;
@@ -221,6 +222,10 @@
 		state = STATE.PAUSE;
 		gameTitle.classList.add('hide');
 
+
+		aCoin.muted = false;
+		aHurt.muted = false;
+
 		levelCutScene.innerHTML = '<h1>Stage '+level+' Start!!</h1>';
 		levelCutScene.classList.remove('hide');
 		setTimeout(function(){
@@ -258,7 +263,11 @@
 		levelLose.classList.add('hide');	
 		gameHiscore.classList.add('hide');	
 		gamePause.classList.add('hide');		
-		gameTitle.classList.remove('hide');			
+		gameTitle.classList.remove('hide');		
+
+		aCoin.muted = true;
+		aHurt.muted = true;
+	
 	}
 
 	function showHiscore(){
@@ -297,6 +306,7 @@
 
 			if(enemies[i].hitted()){
 				if(hp > 0){
+					aHurt.play();
 					hp--;
 				}
 			}
@@ -309,7 +319,6 @@
 				hitItems = items.splice(i,1);
 				hitItems[0].destroy();
 				score=score+10;
-				aCoin.muted = false;
 				aCoin.play();
 			}
 		}
