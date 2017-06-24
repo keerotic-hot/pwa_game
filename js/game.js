@@ -3,6 +3,8 @@
 		TITLE:0,
 		PLAYING:1,
 		PAUSE:2,
+		WIN:3,
+		LOSE:4,
 	};
 
 	var container;
@@ -69,13 +71,7 @@
 
 		initController();
 
-		for(i = 0; i < 10; i++){
-			enemies.push(new Enemy());
-		}
-
-		for(i = 0; i < 20; i++){
-			items.push(new Item());
-		}
+		generateLevel(2,5);
 	}
 
 	function onWindowResize(){
@@ -118,11 +114,22 @@
 		scene.add(light);
 	}
 
+	function generateLevel(numEnenies,numItems){
+
+		for(i = 0; i < numEnenies; i++){
+			enemies.push(new Enemy());
+		}
+
+		for(i = 0; i < numItems; i++){
+			items.push(new Item());
+		}
+	}
+
 	function playGame(){
 		state = STATE.PAUSE;
 		gameTitle.classList.add('hide');
 
-		levelCutScene.innerHTML = '<h1>Level : '+level+'</h1>';
+		levelCutScene.innerHTML = '<h1>Level '+level+' Start!!</h1>';
 		levelCutScene.classList.remove('hide');
 		setTimeout(function(){
 			levelCutScene.classList.add('hide');
@@ -140,6 +147,13 @@
 		gamePause.classList.add('hide');		
 	}
 
+	function nextLevel(){
+		levelWin.classList.add('hide');		
+		level++;
+		generateLevel(2,5);
+		playGame();
+	}
+
 	function loop(){
 		requestAnimationFrame(loop);
 		
@@ -151,6 +165,10 @@
 				break;
 			case STATE.PAUSE:
 				pauseLoop();
+				break;
+			case STATE.WIN:
+				break;
+			case STATE.LOSE:
 				break;
 		}
 	}
@@ -195,6 +213,12 @@
 
 		if(camera.rotation.x*toDeg<-80){
 			pauseGame();
+		}
+
+		if(items.length <= 0){
+			state = STATE.WIN;
+			levelWin.classList.remove('hide');
+			//levelWin.innerHTML = '<h1>Level '+level+' Clear!!</h1>';
 		}
 	}
 
