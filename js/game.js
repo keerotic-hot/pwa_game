@@ -425,9 +425,10 @@
 				child.material = mat;
 			}
 		});
-		var count = 0;
+
+		var count = Math.random()*180;
 		_this.update = function(){
-			//...
+			
 			var n = Math.abs(Math.sin(count*2*toRad)*5);
 			var h = 10+n;
 			var w = 15-n;
