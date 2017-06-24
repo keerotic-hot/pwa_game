@@ -5,14 +5,20 @@
 	var light;
 	var camera;
 	var controls;
-	var items = [];
 
 	var toRad = Math.PI/180;
 	var toDeg = 180/Math.PI;
 
+	var touches = [];
+	
 	var speed = 0;
-	var MAX_SPEED = 5;
+	var MAX_SPEED = 1;
 
+	var items = [];
+	var bullets = [];
+	
+
+	
 	var info = document.getElementById('info');
 
 	window.addEventListener('load', function() {
@@ -93,9 +99,15 @@
 		
 		walkIf(touches.length>0);
 		
+		if(touches.length>0){
+			fire();
+		}
 
 		for(var i in items){
 			items[i].update();
+		}
+		for(var i in bullets){
+			bullets[i].update();
 		}
 
 		controls.update();
@@ -118,6 +130,15 @@
 		var dir = camera.getWorldDirection();
 		dir.y = 0;
 		camera.position.add(dir.multiplyScalar(speed));
+	}
+
+	var canFire = true;
+	function fire(){
+		if(canFire){
+			bullets.push(new Bullet());
+			canFire = false;
+			setTimeout(function(){canFire = true},1000);
+		}
 	}
 
 	function Item(){
@@ -143,7 +164,31 @@
 		}
 	}
 
-	var touches = [];
+
+	function Bullet(){
+		var _this = this;
+		var geo = new THREE.BoxGeometry(1,1,1,1,1,1);
+		var mat = new THREE.MeshPhongMaterial({ 
+			color: 0xffff00, 
+			shading: THREE.FlatShading, 
+			overdraw: 0.5, 
+			shininess: 0 
+		});
+		var mesh = new THREE.Mesh(geo,mat);
+
+		var dir = camera.getWorldDirection();
+
+		scene.add(mesh);
+
+		mesh.position.set(camera.position.x,camera.position.y,camera.position.z);
+		mesh.rotation.set(camera.rotation.x,camera.rotation.y,camera.rotation.z);
+		
+		_this.update = function(){
+			mesh.position.add(dir.multiplyScalar(2));
+			mesh.rotateZ(-10*toRad);
+		}
+	}
+
 	function initController(){
 		info.innerHTML = 'init controller';
 
@@ -162,23 +207,5 @@
 			info.innerHTML = 'touchend : '+touches.length;
 		});
 	}
-
-
-	/*function FlyingObject(){
-		var _this = this;
-		var geo = new THREE.BoxGeometry(20,20,20,1,1,1);
-		var mat = new THREE.MeshBasicMaterial({color:0xff0000});
-		var mesh = new THREE.Mesh(geo,mat);
-
-		scene.add(mesh);
-		var x = Math.random()*1000-500;
-		var y = Math.random()*100;
-		var z = Math.random()*1000-500;
-		mesh.position.set(x,y,z);
-	}
-
-	function createFlyingObject(){
-		var fo = new FlyingObject();
-	}*/
 	
 })();
