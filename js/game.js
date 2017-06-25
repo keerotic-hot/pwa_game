@@ -334,6 +334,9 @@
 	delayClear = 0;
 	function gameLoop(){
 
+		if(touches.length==1) MAX_SPEED = 2;
+		if(touches.length==2) MAX_SPEED = 5;
+
 		walkIf(touches.length>0);
 		
 		//if(touches.length>1){ fire(); }
@@ -417,6 +420,7 @@
 		renderer.render(scene,camera);
 	}
 
+	var step = 0;
 	function walkIf(isWalking){
 		if(isWalking){
 			if(speed < MAX_SPEED){
@@ -439,6 +443,10 @@
 		if(pos.x < -B) pos.set(-B,pos.y,pos.z);
 		if(pos.z > B) pos.set(pos.x,pos.y,B);
 		if(pos.z < -B) pos.set(pos.x,pos.y,-B);
+
+		step+=speed/10;
+		step%=360;
+		pos.y = Math.sin(step)*speed/2;
 	}
 
 	var canFire = true;
